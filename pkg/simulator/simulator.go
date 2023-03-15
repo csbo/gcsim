@@ -43,40 +43,16 @@ func Run(opts Options) (result.Summary, error) {
 	baizhu add weapon="prototypeamber" refine=5 lvl=90/90;
 	baizhu add set="oceanhuedclam" count=4;
 	baizhu add stats def%=0 def=0 hp=4780 hp%=0.466 atk=311 atk%=0 er=0.518 em=0 cr=0 cd=0 heal=0.359; #main
-	baizhu add stats def%=0 def=0 hp=0 hp%=0.8 atk=0 atk%=0 er=0.44 em=0 cr=0 cd=0 heal=0;
-	raiden char lvl=90/90 cons=0 talent=6,9,9;
-	raiden add weapon="dragonsbane" refine=5 lvl=90/90;
-	raiden add set="flowerofparadiselost" count=4;
-	raiden add stats def%=0.124 def=97 hp=6693 atk=325 atk%=0.23300000000000004 er=0.097 em=641.5 cr=0.19 cd=0.653;
-	xingqiu char lvl=90/90 cons=6 talent=1,9,9;
-	xingqiu add weapon="favoniussword" refine=5 lvl=90/90;
-	xingqiu add set="deepwoodmemories" count=4;
-	xingqiu add stats def%=0 hp=5087 hp%=0.053 atk=476 atk%=0.7630000000000001 er=0.16199999999999998 em=44 cr=0.66 cd=0.435 hydro%=0.466;
-	yelan char lvl=90/90 cons=1 talent=2,9,9;
-	yelan add weapon="slingshot" refine=5 lvl=90/90;
-	yelan add set="emblemofseveredfate" count=4;
-	yelan add stats def%=0.057999999999999996 def=23 hp=5378 hp%=0.932 atk=391 atk%=0.057999999999999996 er=0.498 cr=0.231 cd=1.046 hydro%=0.466;
-
+	baizhu add stats def%=0 def=0 hp=2032 hp%=0.6 atk=0 atk%=0 er=0.22 em=0 cr=0 cd=0 heal=0;
+	
 	target lvl=100 resist=0.1 pos=0,0;
 	#energy every interval=60,80 amount=10;
 	options swap_delay=4 debug=true iteration=50 duration=500;
 	
 	active baizhu;
 	baizhu burst;
-	while 1 {
-		raiden skill;
-		xingqiu skill[orbital=0], burst[orbital=0], attack;
-		if .xingqiu.skill.ready {
-			xingqiu skill[orbital=0];
-		}
-		yelan skill, burst;
-		baizhu skill;
-		baizhu attack:2, dash, attack:2, dash, attack:2, dash, attack:2, dash;
-		baizhu attack:2, dash, attack:2, dash, attack:2, dash, attack:2, dash;
-		baizhu attack:2, skill;
-		baizhu attack:2, dash, attack:2, dash, attack:2, dash;
-		baizhu attack, burst;
-	}
+	baizhu skill;
+	baizhu attack:2, dash, attack:2, dash;
 	`
 	parser := ast.New(cfg)
 	simcfg, err := parser.Parse()
