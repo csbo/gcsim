@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"context"
 	"encoding/base64"
 	"encoding/json"
@@ -14,7 +13,6 @@ import (
 	"os/exec"
 	"runtime"
 	"runtime/pprof"
-	"strings"
 	"sync"
 	"time"
 
@@ -79,9 +77,10 @@ can be viewed in the browser via "go tool pprof -http=localhost:3000 mem.prof" (
 	if errors.Is(err, os.ErrNotExist) && !usedCLI {
 		fmt.Printf("The file %s does not exist.\n", opt.config)
 		fmt.Println("What is the filepath of the config you would like to run?")
-		in := bufio.NewReader(os.Stdin)
-		line, _ := in.ReadString('\n')
-		opt.config = strings.TrimSpace(line)
+		//in := bufio.NewReader(os.Stdin)
+		//line, _ := in.ReadString('\n')
+		//opt.config = strings.TrimSpace(line)
+		opt.config = ""
 		opt.serve = true
 	}
 
@@ -125,6 +124,8 @@ can be viewed in the browser via "go tool pprof -http=localhost:3000 mem.prof" (
 	}
 
 	res, err := simulator.Run(simopt)
+	//return
+
 	if err != nil {
 		log.Println(err)
 		return
